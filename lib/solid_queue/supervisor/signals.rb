@@ -49,6 +49,7 @@ module SolidQueue
 
         def signal_processes(pids, signal)
           pids.each do |pid|
+            puts "Killing #{pid}" if signal == :QUIT
             signal_process pid, signal
           end
         end

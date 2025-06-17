@@ -11,6 +11,7 @@ class SolidQueue::Process < SolidQueue::Record
   def self.register(**attributes)
     SolidQueue.instrument :register_process, **attributes do |payload|
       create!(attributes.merge(last_heartbeat_at: Time.current)).tap do |process|
+        puts "Registered #{Process.pid} #{$0}"
         payload[:process_id] = process.id
       end
     rescue Exception => error
